@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fatima | Bioinformatician</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06080f;
+    --bg2: #090c18;
+    --bg3: #0d1020;
+    --text: #f0eef8;
+    --text2: #9090b8;
+    --accent: #a855f7;
+    --accent2: #f97316;
+    --accent3: #3b82f6;
+    --card: rgba(8,10,24,0.8);
+    --border: rgba(168,85,247,0.18);
+    --border2: rgba(168,85,247,0.45);
+    --hex: rgba(168,85,247,0.035);
+    --hex-stroke: rgba(100,80,220,0.12);
+  }
+  [data-theme="light"] {
+    --bg: #faf8ff;
+    --bg2: #f2eeff;
+    --bg3: #e8e0ff;
+    --text: #12091e;
+    --text2: #5a4880;
+    --accent: #7c22d4;
+    --accent2: #c2510a;
+    --accent3: #1a4fc4;
+    --card: rgba(255,255,255,0.9);
+    --border: rgba(124,34,212,0.18);
+    --border2: rgba(124,34,212,0.45);
+    --hex: rgba(124,34,212,0.04);
+    --hex-stroke: rgba(124,34,212,0.13);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  /* ─── HEX BACKGROUND ─── */
+  .hex-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hex-bg svg { width: 100%; height: 100%; opacity: 1; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(5,10,15,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.4s;
+  }
+  [data-theme="light"] nav { background: rgba(250,248,255,0.88); }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .logo span { color: var(--text2); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .theme-toggle {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.05em;
+  }
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── HERO ─── */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    padding-top: 5rem;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+  .hero-name .accent {
+    background: linear-gradient(135deg, #a855f7 0%, #e11d9a 40%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-tagline {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    color: var(--text2);
+    margin-bottom: 2rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .hero-tagline strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #a855f7, #e11d9a 55%, #f97316);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover::after { opacity: 1; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid rgba(168,85,247,0.4);
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    border-color: #f97316;
+    color: #f97316;
+  }
+
+  /* DNA visual — hidden */
+  .hero-visual { display: none; }
+  .dna-wrap { display: none; }
+
+  /* ─── ABOUT ─── */
+  #about {
+    padding: 7rem 3rem;
+  }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-bio {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text2);
+  }
+  .about-bio p { margin-bottom: 1.2rem; }
+  .about-bio strong { color: var(--text); }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .skill-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 0.9rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text2);
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    border-color: #f97316;
+    color: #f97316;
+    background: rgba(249,115,22,0.06);
+    transform: translateY(-2px);
+  }
+  .skill-chip .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects {
+    padding: 7rem 3rem;
+    background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  .grad-text {
+    background: linear-gradient(135deg, #a855f7 0%, #e11d9a 40%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168,85,247,0.07), rgba(249,115,22,0.05) 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .project-card:hover {
+    border-color: #f97316;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.4);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: saturate(0.85) brightness(0.9);
+    transition: filter 0.3s;
+  }
+  .project-card:hover .project-img {
+    filter: saturate(1) brightness(1);
+  }
+  .project-img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text2);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+  }
+  .project-body {
+    padding: 1.5rem;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.9rem;
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    background: rgba(249,115,22,0.08);
+    color: #f97316;
+    border: 1px solid rgba(249,115,22,0.25);
+  }
+  [data-theme="light"] .tag {
+    background: rgba(249,115,22,0.08);
+    color: #c2510a;
+    border-color: rgba(249,115,22,0.3);
+  }
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  .project-links {
+    display: flex;
+    gap: 0.8rem;
+  }
+  .project-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    padding-bottom: 1px;
+  }
+  .project-link:hover { border-color: var(--accent); }
+
+  /* ─── SERVICES ─── */
+  #services {
+    padding: 7rem 3rem;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, #a855f7, #e11d9a, #f97316);
+    transition: width 0.4s;
+  }
+  .service-card:hover {
+    border-color: #f97316;
+    transform: translateY(-4px);
+  }
+  .service-card:hover::after { width: 100%; }
+
+  .service-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    transition: color 0.3s;
+  }
+  .service-card:hover .service-name { color: #f97316; }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-top: 0.8rem;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .service-card:hover .service-desc {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding: 7rem 3rem;
+    background: linear-gradient(180deg, transparent, var(--bg2));
+  }
+  .contact-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-intro {
+    font-size: 1.05rem;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .contact-links {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1.5rem;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  .contact-link:hover {
+    border-color: #f97316;
+    color: #f97316;
+    transform: translateY(-2px);
+  }
+  .contact-link svg {
+    width: 16px; height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+  footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text2);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* ─── ANIMATED DNA ─── */
+  @keyframes dnaFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .dna-wrap { animation: dnaFloat 5s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.45s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.55s; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #home, #about, #projects, #services, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero-inner, .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hex background -->
+<div class="hex-bg">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hexPat" width="80" height="92" patternUnits="userSpaceOnUse" patternTransform="translate(0,0)">
+        <polygon points="40,4 76,23 76,69 40,88 4,69 4,23" fill="var(--hex)" stroke="var(--hex-stroke)" stroke-width="1"/>
+        <polygon points="80,48 116,67 116,113 80,132 44,113 44,67" fill="var(--hex)" stroke="var(--hex-stroke)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#hexPat)"/>
+    <radialGradient id="g1" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="80%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <rect width="100%" height="100%" fill="url(#g1)"/>
+    <rect width="100%" height="100%" fill="url(#g2)"/>
+  </svg>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">F<span>.</span>bioinfo</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☽ Dark</button>
+</nav>
+
+<!-- Hero -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Bioinformatics · Rawalpindi, PK</div>
+      <h1 class="hero-name">Hi, I'm<br><span class="accent">Fatima.</span></h1>
+      <p class="hero-tagline">
+        I decode <strong>life's code</strong> — where biology meets algorithms,<br>
+        and data becomes discovery.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-secondary">Let's Connect</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dna-wrap">
+        <svg viewBox="0 0 260 420" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <defs>
+            <linearGradient id="dnaG1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95"/>
+              <stop offset="30%" stop-color="#818cf8" stop-opacity="0.9"/>
+              <stop offset="60%" stop-color="#c026d3" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#f97316" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="dnaG2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f97316" stop-opacity="0.9"/>
+              <stop offset="40%" stop-color="#c026d3" stop-opacity="0.85"/>
+              <stop offset="70%" stop-color="#818cf8" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.95"/>
+            </linearGradient>
+          </defs>
+          <!-- Strand 1 -->
+          <path d="M130,10 C80,40 180,80 130,110 C80,140 180,180 130,210 C80,240 180,280 130,310 C80,340 180,380 130,410" stroke="url(#dnaG1)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Strand 2 -->
+          <path d="M130,10 C180,40 80,80 130,110 C180,140 80,180 130,210 C180,240 80,280 130,310 C180,340 80,380 130,410" stroke="url(#dnaG2)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Rungs -->
+          <line x1="130" y1="10" x2="130" y2="10" stroke="#38bdf8" stroke-width="2"/>
+          <line x1="105" y1="30" x2="155" y2="30" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="96" y1="55" x2="164" y2="55" stroke="#818cf8" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="104" y1="80" x2="156" y2="80" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="130" y1="110" x2="130" y2="110"/>
+          <line x1="105" y1="130" x2="155" y2="130" stroke="#c026d3" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="96" y1="155" x2="164" y2="155" stroke="#e11d9a" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="104" y1="180" x2="156" y2="180" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="130" y1="210" x2="130" y2="210"/>
+          <line x1="105" y1="230" x2="155" y2="230" stroke="#f97316" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="96" y1="255" x2="164" y2="255" stroke="#e11d9a" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="104" y1="280" x2="156" y2="280" stroke="#c026d3" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="130" y1="310" x2="130" y2="310"/>
+          <line x1="105" y1="330" x2="155" y2="330" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="96" y1="355" x2="164" y2="355" stroke="#818cf8" stroke-width="1.5" stroke-opacity="0.7"/>
+          <line x1="104" y1="380" x2="156" y2="380" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.7"/>
+          <!-- Node dots -->
+          <circle cx="130" cy="10" r="5" fill="#38bdf8" opacity="0.95"/>
+          <circle cx="130" cy="110" r="5" fill="#a855f7" opacity="0.95"/>
+          <circle cx="130" cy="210" r="5" fill="#f97316" opacity="0.95"/>
+          <circle cx="130" cy="310" r="5" fill="#a855f7" opacity="0.95"/>
+          <circle cx="130" cy="410" r="5" fill="#38bdf8" opacity="0.95"/>
+          <!-- Glow circles -->
+          <circle cx="130" cy="10" r="12" fill="#38bdf8" opacity="0.1"/>
+          <circle cx="130" cy="110" r="12" fill="#a855f7" opacity="0.1"/>
+          <circle cx="130" cy="210" r="12" fill="#f97316" opacity="0.1"/>
+          <circle cx="130" cy="310" r="12" fill="#a855f7" opacity="0.1"/>
+          <circle cx="130" cy="410" r="12" fill="#38bdf8" opacity="0.1"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">About Me</div>
+    <h2 class="section-title reveal">Not just a scientist.<br>A <span class="grad-text">code-wielding</span> one.</h2>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I'm <strong>Fatima</strong> — a bioinformatics student with a love for the intersection of genomics, machine learning, and computational biology. I believe the most exciting discoveries don't happen in labs alone — they happen when biology speaks in data.</p>
+        <p>From building <strong>end-to-end genomic ML pipelines</strong> to mining phytochemical similarity for cancer-relevant compounds, I work at the edge of what wet-lab science and algorithms can do together.</p>
+        <p>Currently seeking opportunities to apply computational approaches to real-world biological questions — and yes, I make my plots look good too.</p>
+      </div>
+      <div class="reveal">
+        <p style="font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--text2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Skills & Tools</p>
+        <div class="skills-list">
+          <div class="skill-chip"><span class="dot"></span>Python</div>
+          <div class="skill-chip"><span class="dot"></span>R / Bioconductor</div>
+          <div class="skill-chip"><span class="dot"></span>Machine Learning</div>
+          <div class="skill-chip"><span class="dot"></span>GWAS / QC</div>
+          <div class="skill-chip"><span class="dot"></span>3D Geometry</div>
+          <div class="skill-chip"><span class="dot"></span>Scikit-learn</div>
+          <div class="skill-chip"><span class="dot"></span>Biopython</div>
+          <div class="skill-chip"><span class="dot"></span>Linux / Bash</div>
+          <div class="skill-chip"><span class="dot"></span>Data Viz</div>
+          <div class="skill-chip"><span class="dot"></span>Git / GitHub</div>
+          <div class="skill-chip"><span class="dot"></span>HTML & CSS</div>
+          <div class="skill-chip"><span class="dot"></span>Molecular Docking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">Work that <span class="grad-text">matters.</span></h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <img src="9.png" alt="ML Data Pipeline" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="project-img-placeholder" style="display:none">[ Project Screenshot ]</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">ML</span>
+            <span class="tag">Genomics</span>
+            <span class="tag">Python</span>
+          </div>
+          <h3 class="project-title">End-to-End Data Preparation Pipelines for ML</h3>
+          <p class="project-desc">A multimodal data preparation pipeline for genomic and biometric machine learning — integrating GWAS QC, facial 3D geometry processing, and advanced feature engineering for model-ready datasets.</p>
+          <div class="project-links">
+            <a href="#" class="project-link">GitHub ↗</a>
+            <a href="#" class="project-link">Details ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <img src="10.png" alt="Phytochemical Analysis" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="project-img-placeholder" style="display:none">[ Project Screenshot ]</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Cheminformatics</span>
+            <span class="tag">ML</span>
+            <span class="tag">Cancer Research</span>
+          </div>
+          <h3 class="project-title">Phytochemical Similarity Analysis</h3>
+          <p class="project-desc">Identified structurally similar bioactive compounds using ML pipelines and comparative analysis. Ranked top compounds based on cancer-relevant hits through molecular docking and structural alignment.</p>
+          <div class="project-links">
+            <a href="#" class="project-link">GitHub ↗</a>
+            <a href="#" class="project-link">Details ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="border-style: dashed; opacity: 0.6; cursor: default;">
+        <div class="project-img-placeholder">+ Coming Soon</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="tag">In Progress</span></div>
+          <h3 class="project-title">Next Project</h3>
+          <p class="project-desc">Always building. Check back soon for the next one.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label reveal">What I Offer</div>
+    <h2 class="section-title reveal">How I can <span class="grad-text">help you.</span></h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <h3 class="service-name">Genomic Data Analysis</h3>
+        <p class="service-desc">GWAS quality control, variant annotation, population stratification, and downstream statistical analysis.</p>
+      </div>
+      <div class="service-card reveal">
+        <h3 class="service-name">ML Pipeline Development</h3>
+        <p class="service-desc">End-to-end machine learning pipelines for biological datasets — from raw data preprocessing to model evaluation.</p>
+      </div>
+      <div class="service-card reveal">
+        <h3 class="service-name">Cheminformatics</h3>
+        <p class="service-desc">Compound similarity analysis, molecular docking support, and phytochemical profiling for drug discovery applications.</p>
+      </div>
+      <div class="service-card reveal">
+        <h3 class="service-name">Data Visualization</h3>
+        <p class="service-desc">Clear, publication-ready figures and interactive dashboards for complex biological and statistical data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="section-label reveal" style="justify-content:center">Get In Touch</div>
+      <h2 class="section-title reveal" style="text-align:center">Let's build something<br><span class="grad-text">meaningful.</span></h2>
+      <p class="contact-intro reveal">
+        Whether you're working on a research project, need a collaborator, or just want to talk bioinformatics — my inbox is open.
+      </p>
+      <div class="contact-links reveal">
+        <a href="mailto:your@email.com" class="contact-link">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          Email Me
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Fatima · Built with HTML & CSS</p>
+  <p style="font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--text2)">
+    <a href="https://github.com/yourusername">github.com/yourusername</a>
+  </p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (html.getAttribute('data-theme') === 'dark') {
+      html.setAttribute('data-theme', 'light');
+      btn.textContent = '☀ Light';
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      btn.textContent = '☽ Dark';
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
