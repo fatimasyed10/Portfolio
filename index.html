@@ -165,13 +165,14 @@
     width: 30px; height: 1px;
     background: var(--accent);
   }
-  .hero-name {
-    font-size: clamp(3.5rem, 6vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
-  }
+ .hero-name {
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.3em;
+}
   .hero-name .accent {
     background: linear-gradient(135deg, #a855f7 0%, #e11d9a 40%, #f97316 100%);
     -webkit-background-clip: text;
@@ -268,12 +269,14 @@
     background: var(--accent);
   }
   .section-title {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+  line-height: 1.3;
+  padding-bottom: 0.3em;
+  overflow: visible;
+}
 
   .about-grid {
     display: grid;
@@ -321,124 +324,200 @@
   }
 
   /* ─── PROJECTS ─── */
-  #projects {
-    padding: 7rem 3rem;
-    background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent);
-  }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-  }
-  .grad-text {
-    background: linear-gradient(135deg, #a855f7 0%, #e11d9a 40%, #f97316 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+#projects {
+  padding: 7rem 3rem;
+  background: linear-gradient(180deg, transparent, var(--bg2) 20%, var(--bg2) 80%, transparent);
+}
 
-  .project-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-    position: relative;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(168,85,247,0.07), rgba(249,115,22,0.05) 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .project-card:hover {
-    border-color: #f97316;
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.4);
-  }
-  .project-card:hover::before { opacity: 1; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
 
-  .project-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    filter: saturate(0.85) brightness(0.9);
-    transition: filter 0.3s;
-  }
-  .project-card:hover .project-img {
-    filter: saturate(1) brightness(1);
-  }
-  .project-img-placeholder {
-    width: 100%;
-    height: 200px;
-    background: var(--bg3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text2);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-  }
-  .project-body {
-    padding: 1.5rem;
-  }
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 0.9rem;
-  }
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.6rem;
-    border-radius: 2px;
-    background: rgba(249,115,22,0.08);
-    color: #f97316;
-    border: 1px solid rgba(249,115,22,0.25);
-  }
-  [data-theme="light"] .tag {
-    background: rgba(249,115,22,0.08);
-    color: #c2510a;
-    border-color: rgba(249,115,22,0.3);
-  }
-  .project-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    color: var(--text);
-    line-height: 1.3;
-  }
-  .project-desc {
-    font-size: 0.88rem;
-    color: var(--text2);
-    line-height: 1.7;
-    margin-bottom: 1.2rem;
-  }
-  .project-links {
-    display: flex;
-    gap: 0.8rem;
-  }
-  .project-link {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-    padding-bottom: 1px;
-  }
-  .project-link:hover { border-color: var(--accent); }
+.grad-text {
+  background: linear-gradient(135deg, #a855f7 0%, #e11d9a 40%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── CARD BASE ─── */
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.35s cubic-bezier(0.4,0,0.2,1),
+              transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);
+  text-decoration: none;   /* for the <a> linked cards */
+  display: block;
+  color: inherit;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(168,85,247,0.07), rgba(249,115,22,0.05) 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:hover {
+  border-color: #f97316;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.4);
+}
+
+.project-card:hover::before { opacity: 1; }
+
+/* ─── INNER WRAPPER ─── */
+.project-card-inner {
+  position: relative;
+  height: 100%;
+}
+
+/* ─── IMAGE ─── */
+.project-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  filter: saturate(0.85) brightness(0.9);
+  transition: filter 0.35s;
+}
+
+.project-card:hover .project-img {
+  filter: saturate(1) brightness(1);
+}
+
+/* ─── STATIC INFO (visible before hover) ─── */
+.project-static-info {
+  padding: 1.5rem;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.project-card:hover .project-static-info {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+/* ─── HOVER OVERLAY (slides up on hover) ─── */
+.project-hover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    var(--card) 70%,
+    rgba(var(--card-rgb, 15,15,20), 0.92) 100%
+  );
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.3s ease;
+  z-index: 2;
+}
+
+.project-card:hover .project-hover-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ─── GITHUB BADGE (linked cards only) ─── */
+.project-github-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f97316;
+  margin-top: 0.6rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.project-card--linked:hover .project-github-badge {
+  opacity: 1;
+}
+
+/* ─── TAGS ─── */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.project-tags--overlay {
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  background: rgba(249,115,22,0.08);
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.25);
+}
+
+[data-theme="light"] .tag {
+  background: rgba(249,115,22,0.08);
+  color: #c2510a;
+  border-color: rgba(249,115,22,0.3);
+}
+
+/* ─── TEXT ─── */
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ─── LINKS (in template card overlay) ─── */
+.project-links {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.project-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  padding-bottom: 1px;
+}
+
+.project-link:hover { border-color: var(--accent); }
 
   /* ─── SERVICES ─── */
   #services {
@@ -717,7 +796,7 @@
 <section id="about">
   <div class="section-inner">
     <div class="section-label reveal">About Me</div>
-    <h2 class="section-title reveal">Not just a scientist.<br>A <span class="grad-text">code-wielding</span> one.</h2>
+   <h2 class="section-title reveal" style="overflow:visible; padding-bottom:0.15em">Not just a scientist.<br>A <span class="grad-text">code-wielding</span> one.</h2>
     <div class="about-grid">
       <div class="about-bio reveal">
         <p>I'm <strong>Fatima</strong> — a bioinformatics student with a love for the intersection of genomics, machine learning, and computational biology. I believe the most exciting discoveries don't happen in labs alone — they happen when biology speaks in data.</p>
@@ -745,61 +824,99 @@
   </div>
 </section>
 
-<!-- Projects -->
+<!-- ─── PROJECTS SECTION ─── -->
 <section id="projects">
-  <div class="section-inner">
-    <div class="section-label reveal">Projects</div>
-    <h2 class="section-title reveal">Work that <span class="grad-text">matters.</span></h2>
-    <div class="projects-grid">
+  <div class="section-header">
+    <h2 class="section-title">Projects<span class="grad-text">.</span></h2>
+  </div>
 
-      <div class="project-card reveal">
-        <img src="9.png" alt="ML Data Pipeline" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="project-img-placeholder" style="display:none">[ Project Screenshot ]</div>
-        <div class="project-body">
+  <div class="projects-grid">
+
+    <!-- GITHUB-LINKED CARD 1 -->
+    <a class="project-card project-card--linked" href="https://github.com/fatimasyed10/BioDataHub" target="_blank" rel="noopener">
+      <div class="project-card-inner">
+        <img src="images/6.png" alt="Project One" class="project-img" />
+        <div class="project-static-info">
           <div class="project-tags">
-            <span class="tag">ML</span>
-            <span class="tag">Genomics</span>
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+          </div>
+          <h3 class="project-title">Microsoft VS Code Extension</h3>
+          <div class="project-github-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub ↗
+          </div>
+        </div>
+        <div class="project-hover-overlay">
+          <p class="project-desc">
+Developed and integrated a VCF parser for 5 different real word VCF formats for better data handling in the BioDataHub VS Code extension
+Constructed a Bioinformatics beginner guide for non-biologists and beginners to navigate common genomics file fomats
+Actively contributing to further documentation and technical improvements.
+</p>
+          <div class="project-tags project-tags--overlay">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- GITHUB-LINKED CARD 2 -->
+    <a class="project-card project-card--linked" href="https://github.com/fatimasyed10/NGS-Sensitivity-Benchmark" target="_blank" rel="noopener">
+      <div class="project-card-inner">
+        <img src="images/9.png" alt="Project Two" class="project-img" />
+        <div class="project-static-info">
+          <div class="project-tags">
             <span class="tag">Python</span>
-          </div>
-          <h3 class="project-title">End-to-End Data Preparation Pipelines for ML</h3>
-          <p class="project-desc">A multimodal data preparation pipeline for genomic and biometric machine learning — integrating GWAS QC, facial 3D geometry processing, and advanced feature engineering for model-ready datasets.</p>
-          <div class="project-links">
-            <a href="#" class="project-link">GitHub ↗</a>
-            <a href="#" class="project-link">Details ↗</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <img src="10.png" alt="Phytochemical Analysis" class="project-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="project-img-placeholder" style="display:none">[ Project Screenshot ]</div>
-        <div class="project-body">
-          <div class="project-tags">
-            <span class="tag">Cheminformatics</span>
             <span class="tag">ML</span>
-            <span class="tag">Cancer Research</span>
           </div>
-          <h3 class="project-title">Phytochemical Similarity Analysis</h3>
-          <p class="project-desc">Identified structurally similar bioactive compounds using ML pipelines and comparative analysis. Ranked top compounds based on cancer-relevant hits through molecular docking and structural alignment.</p>
+          <h3 class="project-title">NGS Sensitivity Benchmark Pipeline using GIAB dataset</h3>
+          <div class="project-github-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub ↗
+          </div>
+        </div>
+        <div class="project-hover-overlay">
+          <p class="project-desc">
+End-to-end NGS analytical sensitivity & specificity pipeline using GIAB benchmarking data. 
+Calculates TP/FP/FN at 1%, 3% and 5% VAF cutoffs with liftover, BED intersection and figures.
+</p>
+          <div class="project-tags project-tags--overlay">
+            <span class="tag">Python</span>
+            <span class="tag">ML</span>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- ─── TEMPLATE CARD (no link, copy-paste this for other projects) ─── -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <img src="images/7.png" alt="Project Three" class="project-img" />
+        <div class="project-static-info">
+          <div class="project-tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Next.js</span>
+          </div>
+          <h3 class="project-title">SNP based GWAS modelling for predicting EVCs</h3>
+        </div>
+        <div class="project-hover-overlay">
+          <p class="project-desc">What does this do? Why did you build it? What was the hardest part? Keep it specific and honest — this is the hook that makes someone want to talk to you about it.</p>
+          <div class="project-tags project-tags--overlay">
+            <span class="tag">TypeScript</span>
+            <span class="tag">Next.js</span>
+          </div>
           <div class="project-links">
-            <a href="#" class="project-link">GitHub ↗</a>
-            <a href="#" class="project-link">Details ↗</a>
+            <a href="#" class="project-link" onclick="event.stopPropagation()">GitHub ↗</a>
+            <a href="#" class="project-link" onclick="event.stopPropagation()">Live ↗</a>
           </div>
         </div>
       </div>
-
-      <div class="project-card reveal" style="border-style: dashed; opacity: 0.6; cursor: default;">
-        <div class="project-img-placeholder">+ Coming Soon</div>
-        <div class="project-body">
-          <div class="project-tags"><span class="tag">In Progress</span></div>
-          <h3 class="project-title">Next Project</h3>
-          <p class="project-desc">Always building. Check back soon for the next one.</p>
-        </div>
-      </div>
-
     </div>
+
   </div>
 </section>
+
 
 <!-- Services -->
 <section id="services">
